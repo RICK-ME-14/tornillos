@@ -1,0 +1,30 @@
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+
+# Volcados de base de datos: nunca dentro del repositorio.
+*.sql
+*.sql.gz
+*.dump
+
+# Certificados digitales y llaves
+/storage/app/facturacion/pe
+*.pfx
+*.p12
+*.pem

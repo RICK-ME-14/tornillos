@@ -1,0 +1,33 @@
+# =============================================================
+# Red de seguridad para la RAIZ del proyecto.
+#
+# El servidor debe apuntar a la carpeta public/ y entonces este
+# archivo nunca se usa. Existe para el dia en que alguien configure
+# mal el document root: sin el, quedarian expuestos el .env con las
+# credenciales de la base y de SUNAT, los volcados de la base y el
+# certificado digital.
+#
+# Es una defensa de ultimo recurso, no un sustituto de apuntar
+# correctamente el document root.
+# =============================================================
+
+# ---- Apache 2.4 ----
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.env|\.(env\..*|sql|sqlite|dump|log|pem|pfx|p12|key|crt|lock|json|md|yml|yaml|xml|ini|sh|bak)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# ---- Apache 2.2 ----
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^\.env|\.(env\..*|sql|sqlite|dump|log|pem|pfx|p12|key|crt|lock|json|md|yml|yaml|xml|ini|sh|bak)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+# Carpetas que nunca deben servirse desde la web.
+RedirectMatch 404 ^/(\.git|\.github|app|bootstrap|config|database|resources|routes|storage|tests|tools|vendor)(/|$)
+
+# Sin listados de directorio.
+Options -Indexes

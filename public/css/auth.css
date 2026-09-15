@@ -1,0 +1,220 @@
+/* ===========================================================
+   Pantalla de acceso
+   Identidad de taller: grafito, acero y el ámbar del aceite.
+   Autocontenida: no depende de app.css ni la afecta.
+   =========================================================== */
+
+:root{
+    --a-carbon:      #14181d;   /* grafito profundo */
+    --a-carbon-2:    #1c2229;   /* grafito medio */
+    --a-steel:       #2b333c;   /* acero */
+    --a-amber:       #f0a500;   /* aceite de motor */
+    --a-amber-2:     #ffc340;   /* aceite a contraluz */
+    --a-amber-deep:  #c47f00;
+    --a-text:        #eef2f6;
+    --a-muted:       #97a3b0;
+    --a-line:        #dfe4ea;
+    --a-ink:         #1d242c;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+
+body{
+    font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    font-size:14px;
+    color:var(--a-ink);
+    background:var(--a-carbon);
+    /* Halo cálido: el reflejo del aceite sobre el metal. */
+    background-image:
+        radial-gradient(1100px 600px at 78% -10%, rgba(240,165,0,.16), transparent 60%),
+        radial-gradient(900px 500px at 8% 108%, rgba(43,51,60,.9), transparent 60%),
+        linear-gradient(160deg, #10141a 0%, #191f26 55%, #0e1216 100%);
+    background-attachment:fixed;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+}
+
+/* ---------- Tarjeta ---------- */
+.acceso{
+    width:100%;max-width:940px;
+    display:grid;grid-template-columns:1.05fr .95fr;
+    background:#fff;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.55), 0 2px 0 rgba(255,255,255,.06) inset;
+}
+
+/* ---------- Panel izquierdo: la marca ---------- */
+.acceso-marca{
+    position:relative;
+    padding:44px 42px;
+    background:linear-gradient(155deg, var(--a-carbon-2) 0%, var(--a-carbon) 60%, #0d1115 100%);
+    color:var(--a-text);
+    display:flex;flex-direction:column;
+    overflow:hidden;
+}
+
+/* Trama de tuercas hexagonales, apenas perceptible. */
+.acceso-trama{
+    position:absolute;inset:0;
+    opacity:.055;
+    pointer-events:none;
+}
+
+/* Filo ámbar que separa los dos paneles. */
+.acceso-marca::after{
+    content:'';position:absolute;top:0;right:0;bottom:0;width:3px;
+    background:linear-gradient(180deg, transparent, var(--a-amber) 25%, var(--a-amber-deep) 75%, transparent);
+}
+
+.acceso-logo{
+    position:relative;
+    width:58px;height:58px;margin-bottom:24px;
+    display:flex;align-items:center;justify-content:center;
+}
+.acceso-logo > img{width:100%;height:100%;object-fit:contain}
+.acceso-logo img{width:100%;height:100%;object-fit:cover;border-radius:15px}
+
+.acceso-nombre{
+    position:relative;
+    margin:0 0 8px;font-size:27px;line-height:1.15;font-weight:800;
+    letter-spacing:-.4px;
+}
+.acceso-rubro{
+    position:relative;
+    margin:0;font-size:13px;font-weight:600;letter-spacing:2.4px;
+    text-transform:uppercase;color:var(--a-amber-2);
+}
+.acceso-desc{
+    position:relative;
+    margin:20px 0 0;font-size:13.5px;line-height:1.65;color:var(--a-muted);
+    max-width:34ch;
+}
+
+.acceso-rasgos{
+    position:relative;
+    list-style:none;margin:auto 0 0;padding:26px 0 0;
+    display:grid;gap:13px;
+    border-top:1px solid rgba(255,255,255,.07);
+}
+.acceso-rasgos li{
+    display:flex;align-items:center;gap:12px;
+    font-size:13px;color:#c3ccd6;
+}
+.acceso-rasgos .ico{
+    flex:0 0 auto;width:30px;height:30px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(240,165,0,.12);color:var(--a-amber-2);
+    border:1px solid rgba(240,165,0,.22);
+}
+
+/* ---------- Panel derecho: el formulario ---------- */
+.acceso-form{
+    padding:52px 46px;
+    display:flex;flex-direction:column;justify-content:center;
+    background:#fff;
+}
+.acceso-form h2{
+    margin:0 0 6px;font-size:22px;font-weight:700;color:var(--a-ink);
+}
+.acceso-form .sub{
+    margin:0 0 28px;font-size:13.5px;color:#77828e;
+}
+
+.campo{margin-bottom:18px}
+.campo label{
+    display:block;font-size:11.5px;font-weight:700;letter-spacing:.6px;
+    text-transform:uppercase;color:#7a858f;margin-bottom:7px;
+}
+.campo-caja{position:relative}
+.campo-caja > i{
+    position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    color:#a9b3bd;font-size:14px;transition:color .15s;
+    pointer-events:none;
+}
+.campo input[type=email],
+.campo input[type=password]{
+    width:100%;padding:13px 14px 13px 42px;
+    border:1.5px solid var(--a-line);border-radius:10px;
+    font-size:14.5px;color:var(--a-ink);background:#fbfcfd;
+    transition:border-color .15s, box-shadow .15s, background .15s;
+}
+.campo input::placeholder{color:#b3bcc5}
+.campo input:focus{
+    outline:none;background:#fff;
+    border-color:var(--a-amber);
+    box-shadow:0 0 0 4px rgba(240,165,0,.16);
+}
+.campo-caja:focus-within > i{color:var(--a-amber-deep)}
+
+.recordar{
+    display:flex;align-items:center;gap:9px;
+    font-size:13.5px;color:#6c7782;margin:4px 0 24px;
+    cursor:pointer;user-select:none;
+}
+.recordar input{
+    width:16px;height:16px;accent-color:var(--a-amber-deep);cursor:pointer;margin:0;
+}
+
+.acceso-btn{
+    width:100%;
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:14px 20px;border:none;border-radius:11px;
+    font-size:15px;font-weight:700;letter-spacing:.2px;color:#221803;
+    background:linear-gradient(135deg, var(--a-amber-2) 0%, var(--a-amber) 55%, var(--a-amber-deep) 100%);
+    box-shadow:0 8px 20px rgba(240,165,0,.32);
+    cursor:pointer;
+    transition:transform .12s, box-shadow .15s, filter .15s;
+}
+.acceso-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(240,165,0,.42)}
+.acceso-btn:active{transform:translateY(0);filter:brightness(.96)}
+.acceso-btn:focus-visible{outline:3px solid rgba(240,165,0,.5);outline-offset:2px}
+
+.acceso-error{
+    display:flex;align-items:flex-start;gap:10px;
+    background:#fdf0ef;border:1px solid #f3c9c5;border-left:4px solid #d64535;
+    color:#a5301f;padding:12px 14px;border-radius:9px;
+    font-size:13.5px;line-height:1.5;margin-bottom:20px;
+}
+.acceso-error i{margin-top:2px}
+
+.acceso-pie{
+    margin-top:26px;padding-top:18px;
+    border-top:1px solid #eef1f4;
+    font-size:12px;color:#98a2ac;text-align:center;line-height:1.6;
+}
+.acceso-pie strong{color:#6c7782;font-weight:600}
+
+/* ---------- Adaptación a pantallas angostas ---------- */
+@media (max-width:860px){
+    body{padding:0;align-items:stretch}
+    .acceso{
+        grid-template-columns:1fr;max-width:520px;margin:auto;
+        border-radius:16px;
+    }
+    .acceso-marca{padding:30px 30px 26px}
+    .acceso-marca::after{
+        top:auto;left:0;right:0;bottom:0;width:auto;height:3px;
+        background:linear-gradient(90deg, transparent, var(--a-amber) 30%, var(--a-amber-deep) 70%, transparent);
+    }
+    .acceso-logo{width:54px;height:54px;margin-bottom:18px}
+    .acceso-nombre{font-size:23px}
+    .acceso-desc{display:none}
+    .acceso-rasgos{
+        grid-template-columns:repeat(3,1fr);gap:10px;
+        padding-top:20px;margin-top:20px;
+    }
+    .acceso-rasgos li{flex-direction:column;text-align:center;gap:7px;font-size:11.5px}
+    .acceso-form{padding:34px 30px 38px}
+}
+
+@media (max-width:420px){
+    .acceso-rasgos{grid-template-columns:1fr;}
+    .acceso-rasgos li{flex-direction:row;text-align:left;font-size:13px}
+    .acceso-form{padding:28px 22px 32px}
+}
+
+/* Respeta a quien pide menos movimiento. */
+@media (prefers-reduced-motion:reduce){
+    .acceso-btn:hover{transform:none}
+    *{transition:none !important}
+}
